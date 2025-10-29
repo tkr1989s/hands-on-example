@@ -33,25 +33,26 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       # Node.jsの準備
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Use Node.js v20
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: "npm"
+
       # インストール
       - run: npm ci
-      # ビルド
+
+      # ビルド（Next.jsで静的書き出しを使う場合は next.config.* に `output: 'export'` を設定）
       - run: npm run build --if-present
 
-      # デプロイ
-      - name: Setup Pages
-        uses: actions/configure-pages@v3
+      # デプロイ（Pages 公式アクションの最新版を使用）
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v1
+        uses: actions/upload-pages-artifact@v3
         with:
-          # Upload entire repository
+          # Upload entire static export directory
           path: "./out/"
+
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v2
+        uses: actions/deploy-pages@v4
