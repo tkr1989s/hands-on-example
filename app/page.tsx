@@ -37,6 +37,7 @@ import {
   useRef,
   useState,
 } from "react";
+
 import GraphTab from "@/components/GraphTab";
 import { TAB_NAME, TabState } from "@/types/TabState";
 import { theme } from "./theme/theme";
